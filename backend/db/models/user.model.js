@@ -3,9 +3,13 @@ import { model, Schema } from "mongoose";
 const userSchema = new Schema({
     userName: {
         type: String,
-        unique: true
+        unique: true,
+        required: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     task:[{
         type: Schema.Types.ObjectId,
         ref: 'Task'
