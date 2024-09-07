@@ -28,6 +28,15 @@ export const login = async (req, res, next) => {
     if (!isMatch) {
         return next(new AppError('invalid credentials', 401))
     }
+    user.active = true
+    await user.save()
     const token = jwt.sign({ _id: user._id }, 'secretKey')
     res.status(200).json({ message: 'user logged in successfully', success: true, data: user, accessToken: token })
+}
+
+export const logout = async (req, res, next) => {
+    const user = await User.findById(req.authUser._id)
+    user.active = false
+    await user.save()
+    res.status(200).json({ message: 'user logged out successfully', success: true })
 }
