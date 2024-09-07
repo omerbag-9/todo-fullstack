@@ -10,7 +10,11 @@ const taskSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    dueDate: Date 
+    dueDate: Date,
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    } 
 })
 
 export const Task = model('Task', taskSchema)
