@@ -25,10 +25,10 @@ export default function Signup() {
     })
     async function registerSubmit(values){
         setLoading(false);
-        let {data} = await axios.post('http://localhost:5000/signup',values).catch((err)=>{
+        let {data} = await axios.post('http://localhost:5000/user/signup',values).catch((err)=>{            
             setErrMsg(err.response.data.message)
             setLoading(true)
-        })
+        })        
         if(data.success === true){
             setLoading(true);
             navigate('/login')
@@ -42,11 +42,11 @@ export default function Signup() {
 
             <label htmlFor="userName">Username : </label>
             <input className='form-control mb-2' type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.userName} id='userName' name='userName' />
-            {formik.errors.userName && formik.dirty.userName ? <div className='alert alert-danger p-2 mt-2'>{formik.errors.userName}</div> : ''}
+            {formik.errors.userName && formik.touched.userName ? <div className='alert alert-danger p-2 mt-2'>{formik.errors.userName}</div> : ''}
 
             <label htmlFor="password">password : </label>
             <input className='form-control mb-2' type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} id='password' name='password' />
-            {formik.errors.password && formik.dirty.password ? <div className='alert alert-danger p-2 mt-2'>{formik.errors.password}</div> : ''}
+            {formik.errors.password && formik.touched.password ? <div className='alert alert-danger p-2 mt-2'>{formik.errors.password}</div> : ''}
 
             {Loading ? <button disabled={!(formik.isValid && formik.dirty)} className='btn bg-primary text-white mt-2' type='submit'>Submit</button> : <><button type='button' className='btn bg-primary text-white mt-2'>
         <ThreeDots

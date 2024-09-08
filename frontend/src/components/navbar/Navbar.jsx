@@ -1,7 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext'
 
 export default function Navbar() {
+  let naviagte = useNavigate();
+  let { userToken, setUserToken } = useContext(UserContext)
+  function logout() {
+    localStorage.removeItem('userToken')
+    setUserToken(null)
+  }
+  useEffect(() => {
+    if (!userToken) {
+      naviagte('/login')
+    }
+  }, [userToken, naviagte])
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -14,15 +27,16 @@ export default function Navbar() {
           </div>
         </div>
         <ul className="navbar-nav d-flex ms-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/signup">signup</Link>
-        </li>
-        <li className="nav-item">
-        <Link className="nav-link active" aria-current="page" to="/login">login</Link>
-        </li>
-        <li className="nav-item">
-        <Link className="nav-link active" aria-current="page">logout</Link>
-        </li>
+          {userToken ? <><li className="nav-item">
+            <Link onClick={() => logout()} className="nav-link active" aria-current="page">logout</Link>
+          </li></> : <><li className="nav-item">
+            <Link className="nav-link active" aria-current="page" to="/signup">signup</Link>
+          </li>
+            <li className="nav-item">
+              <Link className="nav-link active" aria-current="page" to="/login">login</Link>
+            </li>
+          </>}
+
         </ul>
       </nav>
     </>

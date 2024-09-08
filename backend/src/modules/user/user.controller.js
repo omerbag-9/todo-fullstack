@@ -7,7 +7,7 @@ export const signup = async (req, res, next) => {
     const { userName, password } = req.body
     const userExist = await User.findOne({ userName })
     if (userExist) {
-        return next(new AppError('username already in use try another one'), 400)
+        return next(new AppError('username already in use try another one',400))
     }
     const hashedPassword = await bcrypt.hash(password, 8)
     const user = new User({
