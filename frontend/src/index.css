@@ -16,3 +16,16 @@ code {
   width: 70%;
   margin: auto;
 }
+
+
+.input-group-text i {
+  color: #007bff; /* Change color of the calendar icon if needed */
+}
+
+input.form-control {
+  padding: 10px;
+}
+
+.btn {
+  padding: 8px 16px; /* Adjust button padding if needed */
+}

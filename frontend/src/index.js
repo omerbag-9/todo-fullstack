@@ -7,13 +7,17 @@ import "@fortawesome/fontawesome-free/css/all.min.css"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import UserContextProvider from './context/UserContext';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+let querClient = new QueryClient();
 root.render(
   <React.StrictMode>
+        <QueryClientProvider client={querClient}>
     <UserContextProvider>
     <App />
     </UserContextProvider>
+        </QueryClientProvider>
   </React.StrictMode>
 );
 
