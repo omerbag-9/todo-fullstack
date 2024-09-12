@@ -25,7 +25,7 @@ export default function Signup() {
     })
     async function registerSubmit(values){
         setLoading(false);
-        let {data} = await axios.post('http://localhost:5000/user/signup',values).catch((err)=>{            
+        let {data} = await axios.post('https://todo-list-b-fullstack.vercel.app/user/signup',values).catch((err)=>{            
             setErrMsg(err.response.data.message)
             setLoading(true)
         })        
