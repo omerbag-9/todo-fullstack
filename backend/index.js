@@ -6,7 +6,7 @@ import { userRouter } from './src/modules/user/user.router.js'
 import { globalErrorHandler } from './src/utils/asyncHandler.js'
 
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 app.use(cors({
     origin: 'http://localhost:3000',
 }))
