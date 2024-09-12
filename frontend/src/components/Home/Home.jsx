@@ -22,7 +22,7 @@ export default function Home() {
   async function getTasks() {
     try {
       setLoading(true); // Start loading
-      let { data } = await axios.get('http://localhost:5000/task', {
+      let { data } = await axios.get('https://todo-list-b-fullstack.vercel.app/task', {
         headers: {
           token: localStorage.getItem('userToken'),
         },
@@ -42,7 +42,7 @@ export default function Home() {
   // Function to delete task
   async function deleteTask(id) {
     try {
-      await axios.delete(`http://localhost:5000/task/${id}`, {
+      await axios.delete(`https://todo-list-b-fullstack.vercel.app/task/${id}`, {
         headers: {
           token: localStorage.getItem('userToken'),
         },
@@ -57,7 +57,7 @@ export default function Home() {
   async function addTask(values) {
     try {
       setLoading(true);
-      await axios.post('http://localhost:5000/task', values, {
+      await axios.post('https://todo-list-b-fullstack.vercel.app/task', values, {
         headers: {
           token: localStorage.getItem('userToken'),
         },
@@ -87,7 +87,7 @@ export default function Home() {
   async function handleCheckboxChange(id, completed) {
     try {
       await axios.put(
-        `http://localhost:5000/task/${id}`,
+        `https://todo-list-b-fullstack.vercel.app/task/${id}`,
         { completed: !completed },
         {
           headers: {
