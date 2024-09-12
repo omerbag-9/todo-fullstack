@@ -8,7 +8,7 @@ import { globalErrorHandler } from './src/utils/asyncHandler.js'
 const app = express()
 const port =  process.env.PORT || 5000
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
 }))
 connectDB()
 app.use(express.json())
