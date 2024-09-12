@@ -1,5 +1,5 @@
 import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import Signup from './components/signup/Signup';
@@ -9,7 +9,7 @@ import { UserContext } from './context/UserContext';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 
-let routers = createBrowserRouter([
+let routers = createHashRouter([
   {
     path: "/", element: <Layout />, children: [
       { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
