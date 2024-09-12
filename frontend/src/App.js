@@ -10,20 +10,24 @@ import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 
 let routers = createBrowserRouter([
-  {path:"/",element:<Layout/>,children:[
-    {index:true,element:<ProtectedRoute><Home/></ProtectedRoute>},
-    {path:"signup",element:<Signup/>},
-    {path:"login",element:<Login/>},
-  ]}
+  {
+    path: "/", element: <Layout />, children: [
+      { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
+      { path: "signup", element: <Signup /> },
+      { path: "login", element: <Login /> },
+    ]
+  }
 ])
 function App() {
-  let {setUserToken} = useContext(UserContext)
-  useEffect(()=>{
-    if(localStorage.getItem('userToken') !== null){
-      setUserToken(localStorage.getItem('userToken'))
+
+  const { setUserToken } = useContext(UserContext)
+  useEffect(() => {
+    const token = localStorage.getItem('userToken');
+    if (token) {
+      setUserToken(token);
     }
-  },[])
-  
+  }, []);
+
   return (
     <RouterProvider router={routers}></RouterProvider>
   );
