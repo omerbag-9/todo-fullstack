@@ -8,6 +8,7 @@ import Loading from '../Loading/Loading';
 export default function Home() {
   // Correcting the useState declaration
   const [data, setData] = useState([]);
+  let [errMsg , setErrMsg] = useState('')
   const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false); // State to toggle calendar visibility
@@ -63,6 +64,7 @@ export default function Home() {
       });
       getTasks(); // Refresh tasks after adding
     } catch (err) {
+      setErrMsg(err.response?.data?.message || err.message);
       console.log(err.response?.data?.message || err.message);
     }
     // set input fields to empty
@@ -102,9 +104,9 @@ export default function Home() {
     <>
       {loading ? (
         <Loading />
-      ) : (
+      ) : <>
         <div className="mx-auto my-5 rounded p-3 bg-dark text-white">
-          <h2 className="text-center py-3">Task Manager</h2>
+          <h2 className="text-center py-3">add Task</h2>
           <form onSubmit={formik.handleSubmit}>
             <div className="input-group mb-3">
               <input
@@ -160,6 +162,7 @@ export default function Home() {
               </div>
             </div>
           </form>
+          {errMsg !== '' ? <div className='alert text-danger p-0 m-0'>{errMsg}</div> : ''}
 
           <hr className="my-4" />
 
@@ -199,7 +202,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      )}
+      </>}
     </>
   );
 }
