@@ -5,17 +5,22 @@ import { AppError } from "../../utils/AppError.js"
 export const addTask = async (req, res, next) => {
     const { task, completed, dueDate } = req.body
 
-        // Convert dueDate to a Date object for comparison
-        const dueDateObj = new Date(dueDate);
+    // Convert dueDate to a Date object for comparison
+    const dueDateObj = new Date(dueDate);
 
-        if(task == ''){
-            return next(new AppError('task cannot be empty', 400));
-        }
+    if (task == '') {
+        return next(new AppError('task cannot be empty', 400));
+    }
 
-        // Check if dueDate is in the past
-        if (dueDateObj.getTime() < Date.now()) {
-            return next(new AppError('Due date cannot be in the past', 400));
-        }
+
+    // Get the start of the current day (today at 00:00)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Check if dueDate is before today
+    if (dueDateObj < today) {
+        return next(new AppError('Due date cannot be in the past. You can add a task for today or future dates.', 400));
+    }
 
     const newTask = new Task({
         task,

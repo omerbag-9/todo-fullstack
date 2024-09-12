@@ -61,11 +61,12 @@ export default function Home() {
         headers: {
           token: localStorage.getItem('userToken'),
         },
+        
       });
-      getTasks(); // Refresh tasks after adding
+      setErrMsg(''); 
+      getTasks(); 
     } catch (err) {
-      setErrMsg(err.response?.data?.message || err.message);
-      console.log(err.response?.data?.message || err.message);
+      setErrMsg(err.response?.data?.message);
     }
     // set input fields to empty
     formik.resetForm();
@@ -176,17 +177,11 @@ export default function Home() {
                 <input
                   type="checkbox"
                   checked={task.completed}
-                  className="btn-check"
+                  className="form-check-input mb-2"
                   id={task._id}
                   onChange={() => handleCheckboxChange(task._id, task.completed)}
                   autoComplete="off"
                 />
-                <label
-                  className="btn btn-outline-success p-1"
-                  htmlFor={task._id}
-                >
-                  done
-                </label>
               </div>
               <button
                 onClick={() => deleteTask(task._id)}
