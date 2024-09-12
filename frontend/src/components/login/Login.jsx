@@ -44,16 +44,16 @@ export default function Login() {
   return <>
     <div className="mx-auto w-75 pt-5">
       <h2 className='mb-4 text-white'>login</h2>
-      {errMsg !== '' ? <div className='alert alert-danger'>{errMsg}</div> : ''}
+      {errMsg !== '' ? <div className='alert text-danger m-0 p-1 text-center'>{errMsg}</div> : ''}
       <form onSubmit={formik.handleSubmit}>
 
         <label className='text-white' htmlFor="userName">Username : </label>
         <input className='form-control mb-2' type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.userName} id='userName' name='userName' />
-        {formik.errors.userName && formik.touched.userName ? <div className='alert alert-danger p-2 mt-2'>{formik.errors.userName}</div> : ''}
+        {formik.errors.userName && formik.touched.userName ? <div className='alert text-danger m-0 p-0'>{formik.errors.userName}</div> : ''}
 
         <label className='text-white' htmlFor="password">password : </label>
         <input className='form-control mb-2' type="password" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} id='password' name='password' />
-        {formik.errors.password && formik.touched.password ? <div className='alert alert-danger p-2 mt-2'>{formik.errors.password}</div> : ''}
+        {formik.errors.password && formik.touched.password ? <div className='alert text-danger m-0 p-0'>{formik.errors.password}</div> : ''}
 
         {Loading ? <button disabled={!(formik.isValid && formik.dirty)} className='btn bg-primary text-white mt-2' type='submit'>Submit</button> : <><button type='button' className='btn bg-primary text-white mt-2'>
           <ThreeDots
