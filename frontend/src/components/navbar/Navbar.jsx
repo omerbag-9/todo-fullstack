@@ -17,7 +17,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-teritary pt-2">
+      <nav className="navbar navbar-expand-lg navbar-expand bg-teritary pt-2">
         <div className="container">
           <Link className="navbar-brand text-primary" to="/">
             <img src={logo} width={40} alt="" />

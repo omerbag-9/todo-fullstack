@@ -8,7 +8,7 @@ import Loading from '../Loading/Loading';
 export default function Home() {
   // Correcting the useState declaration
   const [data, setData] = useState([]);
-  let [errMsg , setErrMsg] = useState('')
+  let [errMsg, setErrMsg] = useState('')
   const [loading, setLoading] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false); // State to toggle calendar visibility
@@ -61,10 +61,10 @@ export default function Home() {
         headers: {
           token: localStorage.getItem('userToken'),
         },
-        
+
       });
-      setErrMsg(''); 
-      getTasks(); 
+      setErrMsg('');
+      getTasks();
     } catch (err) {
       setErrMsg(err.response?.data?.message);
     }
@@ -167,35 +167,40 @@ export default function Home() {
 
           <hr className="my-4" />
 
-          {data?.map((task) => (
-            <div key={task._id} className="py-3">
-              <div
-                className="btn-group"
-                role="group"
-                aria-label="Basic checkbox toggle button group"
-              >
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  className="form-check-input mb-2"
-                  id={task._id}
-                  onChange={() => handleCheckboxChange(task._id, task.completed)}
-                  autoComplete="off"
-                />
+          {data?.map((task) => (<>
+            <div key={task._id} className="py-3 d-flex justify-content-between w-100">
+              <div className="col-6">
+                <div
+                  className="btn-group"
+                  role="group"
+                  aria-label="Basic checkbox toggle button group"
+                >
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    className="form-check-input mb-2"
+                    id={task._id}
+                    onChange={() => handleCheckboxChange(task._id, task.completed)}
+                    autoComplete="off"
+                  />
+                </div>
+                <span className="mx-2 fs-5 text-break">{task.task}</span>
               </div>
-              <button
-                onClick={() => deleteTask(task._id)}
-                className="btn btn-danger float-end"
-                type="submit"
-              >
-                Delete
-              </button>
-              <span className="mx-2 fs-5">{task.task}</span>
-              <span className="mx-2 py-2 text-warning float-end rounded px-2">
-                {`deadline ` + new Date(task.dueDate).toLocaleDateString()}
-              </span>
+              <div className="col-6 align-content-center">
+                <button
+                  onClick={() => deleteTask(task._id)}
+                  className="btn btn-danger float-end"
+                  type="submit"
+                >
+                  Delete
+                </button>
+                <span className=" py-2 text-warning float-end rounded px-2">
+                  {`deadline ` + new Date(task.dueDate).toLocaleDateString()}
+                </span>
+              </div>
             </div>
-          ))}
+            <hr className='bg-primary text-primary' />
+            </>))}
         </div>
       </>}
     </>
